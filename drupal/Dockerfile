@@ -87,4 +87,4 @@ RUN apt-get install -y git-core
 RUN git --version
 
 # install Drupal 8.6.2 version
-RUN php composer create-project drupal-composer/drupal-project:8.x-dev drupal8-project --stability dev --no-interaction
+RUN composer create-project drupal-composer/drupal-project:8.x-dev drupal8-project --stability dev --no-interaction
