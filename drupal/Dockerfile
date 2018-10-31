@@ -51,7 +51,12 @@ RUN { \
 		echo 'opcache.enable_cli=1'; \
 	} > /usr/local/etc/php/conf.d/opcache-recommended.ini
 
-RUN apt-get update & apt-get upgrade
+RUN apt-get update -y && \
+    apt-get upgrade -y && \
+    apt-get dist-upgrade -y && \
+    apt-get -y autoremove && \
+    apt-get clean
+
 RUN apt-get install zip -y
 
 WORKDIR /app
