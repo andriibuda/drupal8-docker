@@ -2,12 +2,12 @@ version: '3.1'
 
 services:
   web:
-    build: .
+    build: ./drupal
     ports: 
       - "8080:80"
     # Drupal should live in the "drupal" directory
     volumes:
-    - ./drupal:/app
+    - ./drupal/src:/app
     # links:
     # - database:database
     environment:
