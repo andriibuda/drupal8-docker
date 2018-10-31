@@ -1,0 +1,46 @@
+version: '3.1'
+
+services:
+  web:
+    build: .
+    ports: 
+      - "8080:80"
+    # Drupal should live in the "drupal" directory
+    volumes:
+    - ./drupal:/app
+    # links:
+    # - database:database
+    environment:
+      # Drupal settings
+      DRUPAL_PROFILE: standard
+      DRUPAL_SITE_NAME: Drupal
+      DRUPAL_USER: admin
+      DRUPAL_PASS: admin
+      DRUPAL_DBURL: mysql://drupal:drupal@database:3306/drupal
+    command: php -S 0.0.0.0:80 -t /app/drupal8-project/web
+    working_dir: /app
+    # links:
+    # - database:database
+    restart: unless-stopped
+    tty: true
+
+  # MariaDB Server
+  database:
+    image: mariadb:10
+    environment:
+      MYSQL_USER: drupal
+      # use this password in Adminer and in Drupal installation
+      MYSQL_PASSWORD: drupal
+      MYSQL_DATABASE: drupal
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+    ports:
+    - "3306:3306"
+    restart: unless-stopped
+
+  # Adminer
+  adminer:
+    image: adminer
+    restart: unless-stopped
+    ports:
+      - "8089:8080"  
