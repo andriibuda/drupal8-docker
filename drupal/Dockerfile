@@ -52,7 +52,7 @@ RUN { \
 	} > /usr/local/etc/php/conf.d/opcache-recommended.ini
 
 RUN apt-get update & apt-get upgrade
-RUN apt-get install -y zip
+RUN apt-get install zip -y
 
 WORKDIR /app
 
