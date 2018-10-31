@@ -62,7 +62,7 @@ RUN apt-get install zip -y
 WORKDIR /app
 
 # https://www.drupal.org/node/3060/release
-ENV DRUPAL_VERSION 8.6.1
+ENV DRUPAL_VERSION 8.6.2
 ENV DRUPAL_MD5 fad034b129695c5066e892cd7cb02a11
 
 # install Composer
@@ -85,3 +85,6 @@ RUN chmod +x /usr/local/bin/drupal
 # install Git 
 RUN apt-get install -y git-core
 RUN git --version
+
+# install Drupal 8.6.2 version
+RUN php composer.phar create-project drupal-composer/drupal-project:8.x-dev drupal8-project --stability dev --no-interaction
